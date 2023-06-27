@@ -34,7 +34,7 @@ route.route('/ecommerce/:idEcommerce')
 
 // Rutas para mobile
 route.route('/mobile')
-  .get(mobileController.getMobiles)
+  .get(mobileController.getMobile)
   .post(mobileController.createMobile);
 
 route.route('/mobile/:idMobile')
@@ -55,17 +55,17 @@ route.route('/webapp/:idWebapp')
   .delete(controller.deleteWebapp);
 
 // Rutas para cliente
-route.route('/cliente')
+route.route('/client')
   .get(landingController.getLandings) 
   .post(landingController.createLanding); 
 
-route.route('/cliente/:idCliente')
-  .get(clienteController.getClienteByID)
-  .put(clienteController.replaceCliente)
-  .patch(clienteController.updateCliente)
-  .delete(clienteController.deleteCliente);
+route.route('/client/:idClient')
+  .get(clientController.getClienteByID)
+  .put(clientController.replaceCliente)
+  .patch(clientController.updateCliente)
+  .delete(clientController.deleteCliente);
 
-  // Rutas  para 
+  // Rutas  para  reviews
 
 route.route('/reviews/:idProducts');
 get(productController.getProductByID)
@@ -75,4 +75,5 @@ get(productController.getProductByID)
 route.use(ReviewRoute);
 
 export default route;
+
 
