@@ -1,6 +1,6 @@
 import { MongoClient, ObjectId } from 'mongodb';
 
-const client = new MongoClient("mongodb://127.0.0.1:27017");
+const Client = new MongoClient("mongodb://127.0.0.1:27017");
 const dbName = "AH20231CP1";
 
 async function getLanding(filter = {}) {
@@ -8,8 +8,8 @@ async function getLanding(filter = {}) {
     filter.landing = { $regex: filter.tecnologias, $options: 'i' };
   }
   try {
-    await client.connect();
-    return client.db(dbName).collection("Projects").find(filter).toArray();
+    await Client.connect();
+    return Client.db(dbName).collection("Projects").find(filter).toArray();
   } catch (err) {
     console.error(err);
     return [];
@@ -18,11 +18,11 @@ async function getLanding(filter = {}) {
 
 async function getLandingById(section) {
     try {
-      await client.connect();
+      await Client.connect();
       const filter = {
         section: section.toLowerCase()
       };
-      return client.db(dbName).collection('Projects').find(filter).toArray();
+      return Client.db(dbName).collection('Projects').find(filter).toArray();
     } catch (err) {
       console.error(err);
       return [];
@@ -31,8 +31,8 @@ async function getLandingById(section) {
   
 async function createLanding(landing) {
   try {
-    await client.connect();
-    const result = await client.db(dbName).collection("Projects").insertOne(landing);
+    await Client.connect();
+    const result = awaitClient.db(dbName).collection("Projects").insertOne(landing);
     console.log("Landing created:", result);
     return result;
   } catch (err) {
@@ -42,8 +42,8 @@ async function createLanding(landing) {
 
 async function editLanding(id, landing) {
   try {
-    await client.connect();
-    return client.db(dbName).collection("Projects").updateOne(
+    await Client.connect();
+    return Client.db(dbName).collection("Projects").updateOne(
       { _id: new ObjectId(id) },
       { $set: landing }
     );
@@ -54,8 +54,8 @@ async function editLanding(id, landing) {
 
 async function replaceLanding(id, landing) {
   try {
-    await client.connect();
-    return client.db(dbName).collection("Projects").replaceOne(
+    await Client.connect();
+    return Client.db(dbName).collection("Projects").replaceOne(
       { _id: new ObjectId(id) },
       landing
     );
@@ -66,8 +66,8 @@ async function replaceLanding(id, landing) {
 
 async function deleteLanding(id) {
   try {
-    await client.connect();
-    return client.db(dbName).collection("Projects").deleteOne(
+    await Client.connect();
+    return Client.db(dbName).collection("Projects").deleteOne(
       { _id: new ObjectId(id) }
     );
   } catch (err) {
@@ -77,11 +77,11 @@ async function deleteLanding(id) {
 
 async function getLandingsBySection(section) {
   try {
-    await client.connect();
+    await Client.connect();
     const filter = {
       section: section.toLowerCase()
     };
-    return client.db(dbName).collection('Projects').find(filter).toArray();
+    return Client.db(dbName).collection('Projects').find(filter).toArray();
   } catch (err) {
     console.error(err);
     return [];
