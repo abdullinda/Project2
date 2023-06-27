@@ -21,13 +21,13 @@ class HTMLGenerator {
       return html;
     }
   
-    generateListClient(clientes) {
+    generateListClient(Clients) {
       let html = '<h1>Clientes</h1>';
       html += '<nav><a href="/">Inicio</a> <a class="menu" href="/cliente/nuevo">Crear cliente</a> <a class="menu" href="/cliente/section/cliente">Ver todos los clientes</a></nav>';
       html += '<ul class="ul-cliente">';
       
-      for (let cliente of clientes) {
-        html += `<li> <h4>${cliente.name}</h4> <div class="clientesDiv"><a href="/cliente/${cliente._id}">Ver</a> <a href="/cliente/${cliente._id}/edit">Modificar</a> <a href="/cliente/${cliente._id}/delete">Eliminar</a></div> </li>`;
+      for (let client of clients) {
+        html += `<li> <h4>${client.name}</h4> <div class="clientesDiv"><a href="/cliente/${client._id}">Ver</a> <a href="/cliente/${cliente._id}/edit">Modificar</a> <a href="/cliente/${cliente._id}/delete">Eliminar</a></div> </li>`;
       }
       
       html += '</ul>';
@@ -35,17 +35,17 @@ class HTMLGenerator {
       return this.generatePage(html);
     }
   
-    generateClienteDetail(cliente) {
-      let html = `<h1>${cliente.name}</h1>`;
+    generateClientDetail(client) {
+      let html = `<h1>${client.name}</h1>`;
       html += '<div class="div-proyect">';
-      html += `<p>${cliente.description}</p>`;
-      html += `<p>${cliente.proyecto}</p>`;
-      html += `<img src="${cliente.img}" alt="${cliente.name}">`;
-      html += `<p>${cliente.section}</p>`;
+      html += `<p>${client.description}</p>`;
+      html += `<p>${client.proyecto}</p>`;
+      html += `<img src="${client.img}" alt="${client.name}">`;
+      html += `<p>${client.section}</p>`;
       
-      if (cliente.cliente && Array.isArray(cliente.cliente) && cliente.cliente.length > 0) {
+      if (client.client && Array.isArray(client.client) && client.client.length > 0) {
         html += "<ul>";
-        cliente.cliente.forEach((item) => {
+        client.client.forEach((item) => {
           html += `<li>${item}</li>`;
         });
         html += "</ul>";
@@ -54,7 +54,7 @@ class HTMLGenerator {
       return this.generatePage(html);
     }
   
-    generateNewClienteForm() {
+    generateNewClientForm() {
       let html = `<form action="/cliente/nuevo" method="post">
         <label for="name">Nombre: 
           <input type="text" name="name" id="name">
@@ -78,23 +78,23 @@ class HTMLGenerator {
       return this.generatePage(html);
     }
   
-    generateEditClienteForm(cliente) {
+    generateEditClientForm(Client) {
       let html = `<h1>Modificar cliente</h1>
-      <form action="/cliente/${cliente._id}/edit" method="post">
+      <form action="/cliente/${client._id}/edit" method="post">
         <label for="name">Nombre: 
-          <input type="text" name="name" id="name" value="${cliente.name}">
+          <input type="text" name="name" id="name" value="${client.name}">
         </label>
         <label for="description">Descripcion:
-          <input type="text" name="description" id="description" value="${cliente.description}">
+          <input type="text" name="description" id="description" value="${client.description}">
         </label>
         <label for="proyecto">Proyecto:
-          <input type="text" name="proyecto" id="proyecto" value="${cliente.proyecto}">
+          <input type="text" name="proyecto" id="proyecto" value="${client.proyecto}">
         </label>
         <label for="img">Imagen del cliente:
-          <input type="text" name="img" id="img" value="${cliente.img}">
+          <input type="text" name="img" id="img" value="${client.img}">
         </label>
         <label for="section">Seccion:
-          <input type="text" name="section" id="section" value="${cliente.section}">
+          <input type="text" name="section" id="section" value="${client.section}">
         </label>
         <button class="btn-confirm" type="submit">Modificar</button>
       </form>
@@ -103,26 +103,26 @@ class HTMLGenerator {
       return this.generatePage(html);
     }
   
-    generateDeleteCliente(cliente) {
-      let html = `<h1>${cliente.name}</h1>`;
+    generateDeleteClient(Client) {
+      let html = `<h1>${Client.name}</h1>`;
       html += '<div class="div-proyect">';
-      html += `<p>${cliente.description}</p>`;
-      html += `<p>${cliente.proyecto}</p>`;
-      html += `<img src="${cliente.img}" alt="${cliente.name}">`;
-      html += `<p>${cliente.section}</p>`;
+      html += `<p>${client.description}</p>`;
+      html += `<p>${client.proyecto}</p>`;
+      html += `<img src="${client.img}" alt="${client.name}">`;
+      html += `<p>${client.section}</p>`;
       
-      if (cliente.cliente && Array.isArray(cliente.cliente) && cliente.cliente.length > 0) {
+      if (client.client && Array.isArray(client.client) && client.client.length > 0) {
         html += "<ul>";
-        cliente.cliente.forEach((item) => {
+        client.client.forEach((item) => {
           html += `<li>${item}</li>`;
         });
         html += "</ul>";
       }
   
-      html += `<form action="/cliente/${cliente._id}/delete" method="post">
+      html += `<form action="/Client/${client._id}/delete" method="post">
         <button class="btn-confirm" type="submit">Eliminar</button>
       </form>
-      <a class="back" href="/cliente/section/cliente">Volver a clientes</a>`;
+      <a class="back" href="/Client/section/Client">Volver a clientes</a>`;
   
       return this.generatePage(html);
     }
@@ -130,9 +130,9 @@ class HTMLGenerator {
   
   export {
     generatePagePage,
-    generateListClientes,
-    generateClienteDetail,
-    generateNewClienteForm,
-    generateEditClienteForm,
-    generateDeleteCliente
+    generateListClient,
+    generateClientDetail,
+    generateNewClientForm,
+    generateEditClientForm,
+    generateDeleteClient
 }
