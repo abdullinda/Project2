@@ -48,10 +48,10 @@ function formEditClient(req, res) {
         .catch(err => res.send(view.generatePage('Error', `<h1>${err}</h1>`)))
 }
 
-function getClientesBySection(req, res) {
+function getClientBySection(req, res) {
     const id = req.params.idClient
 
-    service.getClientesBySection(id)
+    service.getClientBySection(id)
         .then(Client => {
             if (Client) {
                 res.send(view.generateEditClientForm(Client))
@@ -101,7 +101,7 @@ export {
     formEditClient,
     editClient,
     formDeleteClient,
-    getClientesBySection,
+    getClientBySection,
     createClient,
     deleteClient
 }
